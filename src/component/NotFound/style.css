@@ -1,0 +1,10 @@
+.notFound{ 
+  flex: 1;
+  position: relative;
+  overflow: scroll;
+  padding: 0 10px;
+}
+.notFound p{
+  font-size: 18px;
+  text-align: center;
+}
