@@ -13,11 +13,11 @@
 
 ### 豆瓣接口说明
 [豆瓣开发者网站](https://developers.douban.com/wiki/?title=guide)有许多接口的说明文档，需要根据看豆瓣文档中接口的数据格式说明来进行开发页面。
-**注意：豆瓣 API 有权限和访问次数限制，单个 ip 限制每个小时 150 次，这个问题大家可查看[这里](https://developers.douban.com/wiki/?title=api_v2)的说明。因此建议大家在开发时把拉取到的数据存到本地，避免超过次数。**
+**注意：豆瓣 API 有权限和访问次数限制，单个 ip 限制每个小时 150 次，这个问题大家可查看[这里](https://developers.douban.com/wiki/?title=api_v2)的说明。因此建议大家在开发时把拉取到的数据存到本地，避免超过次数。**
 
 
 ## 3. Standard
-使用 `Standard` 来管理 JavaScript 的代码规范。
+使用 `Standard` 来管理 JavaScript 的代码规范。
 
 - [Standard 文档](https://standardjs.com/)
 - [Standard - github 仓库](https://github.com/standard/standard)
