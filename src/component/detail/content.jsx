@@ -140,7 +140,6 @@ class MovieContent extends Component {
             detailData.casts.map((item, index) => {
               return (
                 <div key={index} className='cast'>
-                  <img className='cast-avators' src={item.avatars.medium} />
                   <span className='cast-name'>{item.name}</span>
                 </div>
               )

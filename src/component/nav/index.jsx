@@ -18,38 +18,25 @@ class Nav extends Component {
       }]
     }
   }
-  titleClass (index) {
-    return index === this.state.curIndex ? 'title-item active' : 'title-item'
+  titleClass (type) {
+    return type === this.props.type ? 'title-item active' : 'title-item'
   }
-  handleClick (index, type) {
-    console.log('click', index)
-    this.setState({
-      curIndex: index
-    })
-    this.changeNav(type)
-    this.props.getType(type)
+  handleClick (type) {
+    const {setType, changeListData} = this.props
+    setType(type)
+    changeListData(type)
   }
-  changeNav (type) {
-    switch (type) {
-      case 'book':
-        return this.props.actions.getBooks(type, {})
-      case 'movie':
-        return this.props.actions.getMovies(type, {})
-      case 'music':
-        return this.props.actions.getMusics(type, {})
-    }
-  }
+
   render () {
-    const self = this
     return (
       <div className='nav'>
         {
           this.state.navs.map((item, index) => {
-            const type = self.state.navs[index].type
+            const type = this.state.navs[index].type
             const iconClassName = `icon iconfont icon-${item.type}`
             return (
-              <div className={self.titleClass(index)} key={index}
-                onClick={() => { self.handleClick(index, type) }}
+              <div className={this.titleClass(type)} key={index}
+                onClick={() => { this.handleClick(type) }}
               >
                 <i className={iconClassName} />
                 <div>{ item.catigory }</div>

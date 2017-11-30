@@ -26,8 +26,13 @@
 	height: 100%;
 }
 .deatail-header-title {
-	font-size: 16px;
-	text-align: center;
+	width: 85%;
+    height: 50px;
+    font-size: 16px;
+    text-align: center;
+    margin: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
 } 
 
 .detail-content {
@@ -53,6 +58,9 @@
 }
 .detail-content-info {
 	line-height: 20px;
+	text-overflow: ellipsis;
+    height: 20px;
+    overflow: hidden;
 }
 .detail-content-desc-title {
 	font-weight: bold;

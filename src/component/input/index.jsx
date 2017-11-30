@@ -3,7 +3,10 @@ import './style.css'
 
 class Input extends Component {
   handleClick () {
-    this.props.getKeywords(this.input.value)
+    const {setKeywords, changeSearchData, type} = this.props
+    let keywords = encodeURI(this.input.value)
+    setKeywords(keywords)
+    changeSearchData(type, keywords)
   }
   render () {
     const placeholder = {

@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import * as getInitData from './redux/actions/getInitData'
+import { fetchBooks, fetchMovies, fetchMusics } from './assets/fetchJsonp'
 
 import './style.css'
 import Input from './component/input'
@@ -16,42 +14,87 @@ class App extends Component {
       type: 'book',
       // keywords: '',
       catigory: '',
-      detailData: [],
-      page: 'home'
+      page: 'home',
+      dataState: 0, // 判断数据加载是否完成，1加载完成，0加载中
+      listData: {},
+      detailData: {}
     }
   }
-  getType (type) {
+  getBooks (keywords) {
+    fetchBooks(keywords).then(json => { 
+      this.setState({listData: json.books, dataState: 1})
+    })
+  }
+  getMovies (keywords) {
+    fetchMovies(keywords).then(json => {
+      this.setState({listData: json.subjects, dataState: 1})
+    })
+  }
+  getMusics (keywords) {
+    fetchMusics(keywords).then(json => {
+      this.setState({listData: json.musics, dataState: 1})
+    })
+  }
+  getData (type, keywords) {
+    switch (type) {
+      case 'book':
+        this.getBooks(keywords)
+        return
+      case 'movie':
+        this.getMovies(keywords)
+        return
+      case 'music':
+        this.getMusics(keywords)       
+    }  
+  }
+  changeListData (type) {
+    this.setState({dataState: 0})
+    this.getData(type, {})
+  }
+  changeSearchData (type, keywords) {
+    this.setState({dataState: 0})
+    this.getData(type, {keywords})
+  }
+  setType (type) {
     this.setState({type})
   }
-  getKeywords (keywords) {
+  setKeywords (keywords) {
     this.setState({keywords})
   }
   handleClickDetail (catigory, detailData) {
-    var type = this.state.type
-    console.log(type, detailData.title)
     this.setState({
-      catigory: catigory,
       detailData: detailData,
-      type: type,
+      catigory: catigory,
       page: 'detail'
     })
   }
   handleClickBack () {
     this.setState({page: 'home'})
   }
+
+  /**
+   * 进入首页首先展示图书列表
+   */
   componentWillMount () {
-    this.props.getInitData.getBooks()
+    this.getData('book', {})
   }
 
   render () {
-    const {page, detailData, catigory, type, keywords} = this.state
+    const {page, catigory, type, listData, dataState, detailData} = this.state
     switch (page) {
       case 'home':
         return (
           <div className='app'>
-            <Input type={type} getKeywords={this.getKeywords.bind(this)} />
-            <List type={this.state.type} handleClick={this.handleClickDetail.bind(this)} keywords={keywords} />
-            <Nav actions={this.props.getInitData} getType={this.getType.bind(this)} />
+            <Input type={type}
+              setKeywords={this.setKeywords.bind(this)}
+              changeSearchData={this.changeSearchData.bind(this)}
+            />
+            <List type={this.state.type} listData={listData} dataState={dataState}
+              handleClick={this.handleClickDetail.bind(this)}
+            />
+            <Nav setType={this.setType.bind(this)} type={type}
+              changeListData={this.changeListData.bind(this)}
+            />
           </div>
         )
       case 'detail':
@@ -64,19 +107,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps (state) {
-  return {
-    listData: state.listData
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    getInitData: bindActionCreators(getInitData, dispatch)
-  }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(App)
+export default App
