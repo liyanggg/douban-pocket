@@ -8,11 +8,7 @@
     "dev": "webpack-dev-server --open"
   },
   "keywords": [],
-<<<<<<< HEAD
   "author": "lyang",
-=======
-  "author": "Lyang",
->>>>>>> fbaa552e9cceff8f594207f733f321c3937d3da1
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -31,13 +27,6 @@
   "dependencies": {
     "fetch-jsonp": "^1.1.3",
     "react": "^15.6.1",
-<<<<<<< HEAD
     "react-dom": "^15.6.1"
-=======
-    "react-dom": "^15.6.1",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "redux-promise": "^0.5.3"
->>>>>>> fbaa552e9cceff8f594207f733f321c3937d3da1
   }
 }
